@@ -18,6 +18,7 @@ In diesem Projekt lernst du die Grundlagen der Programmierung mit einem ESP32-Mi
    - [Schritt 2: ESP32 Board Support installieren](#schritt-2-esp32-board-support-installieren)
    - [Schritt 3: Board auswählen](#schritt-3-board-auswählen)
    - [Schritt 4: Adafruit NeoPixel Bibliothek installieren](#schritt-4-adafruit-neopixel-bibliothek-installieren)
+   - [Schritt 5: Git-Client installieren](#schritt-5-git-client-installieren)
 3. [smartLight-Projekt herunterladen](#3-smartlight-projekt-herunterladen)
 4. [Projekt öffnen und hochladen](#4-projekt-öffnen-und-hochladen)
 5. [Programmieren lernen](#5-programmieren-lernen)
