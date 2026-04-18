@@ -35,7 +35,8 @@ In diesem Projekt lernst du die Grundlagen der Programmierung mit einem ESP32-Mi
 - **WI-smartLight Platine mit ESP32-Mikrocontroller und LED Ring** (mit USB-C-Kabel)
 
 ### Software
-- **Arduino IDE** (Version 2.x empfohlen)
+- **Git-Client** (kostenlos zum Download verfügbar)
+- **Arduino IDE** (Version 2.x empfohlen / kostenlos verfügbar)
 - **USB-Treiber** für ESP32 (unter Windows 11 normalerweise bereits installiert)
 
 ---
@@ -72,10 +73,23 @@ In diesem Projekt lernst du die Grundlagen der Programmierung mit einem ESP32-Mi
 3. Installiere **"Adafruit NeoPixel"** von Adafruit
 4. Warte, bis die Installation abgeschlossen ist
 
+### Schritt 5: Git-Client installieren
+
+1. Öffne deinen Browser und gehe zu: https://git-scm.com/install/
+2. Lade die aktuelle **Git-Version** für Windows herunter
+3. Führe die heruntergeladene Installationsdatei aus
+
 ---
 
 ## 3. smartLight-Projekt herunterladen
 
+### Automatische Installation (empfohlen)
+1. Stelle sicher, dass Git auf deinem Rechner installiert ist (siehe Schritt 5)
+2. Laden die Datei **WI-Installer.cmd** auf deinen Rechner
+3. Führe die Datei aus und bestätige die Sicherheitsabfrage
+5. Nach erfolgreicher Installation findest du unter **Dokumente** → **Arduino** den Ordner **WI-Schnuppertag**
+
+### Manuelle Installation
 1. Öffne deinen Browser (Chrome, Firefox, Edge...)
 2. Gehe zu: **https://github.com/wi-schnuppertage/smartlight**
 3. Klicke oben rechts auf den grünen Button **"<> Code"**
@@ -123,7 +137,7 @@ Das Projekt, das unter `Dokumente/Arduino/WI-Schnuppertag` zu finden ist, enthä
 - **`helper.h`** – Hilfsfunktionen und Hardware-Setup (NICHT BEARBEITEN!).
 
 **02_Funktionstest** – Funktionstest für Platine:
-- **`02_Funktionstest.ino`** – Code um die Funktionalität des WI-smartLight zu testen (grüne LED auf 6 Uhr).
+- **`02_Funktionstest.ino`** – Code um die Funktionalität des WI-smartLight zu testen (alle LEDs leuchten grün).
 
 ---
 
@@ -246,6 +260,7 @@ void loop() {
 - **Arduino Referenz:** https://www.arduino.cc/reference/de/
 - **Adafruit NeoPixel Guide:** https://learn.adafruit.com/adafruit-neopixel-uberguide
 - **ESP32 Dokumentation:** https://docs.espressif.com/projects/arduino-esp32/
+- **Git Dokumentation** https://git-scm.com/ 
 
 ---
 
@@ -254,7 +269,7 @@ void loop() {
 **HTL Anichstraße, Innsbruck**  
 Wirtschaftsingenieure - Betriebsinformatik  
 WI-Schnuppertage 
-© 2025 Andreas Eckhart
+© 2026 Andreas Eckhart
 
 ---
 
