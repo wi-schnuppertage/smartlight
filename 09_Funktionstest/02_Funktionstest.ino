@@ -1,10 +1,9 @@
 /***********************************************************************************
- * Teil 1: Grundlagen
- * WI-Schnuppertage 2025 / 2026
+ * WI-Schnuppertage
  ***********************************************************************************
  * Einführung in die Programmierung mittels ESP32 und LED-Ring
  * HTL-Anichstrasse, Innsbruck
- * Wirtschaftsingenieure - Betriebsinformatik / (c)2025 Andreas Eckhart
+ * Wirtschaftsingenieure - Betriebsinformatik / (c)2026 Andreas Eckhart
  ***********************************************************************************/
 
 #include "helper.h"   // Alle Hilfsfunktionen und Hardware-Definitionen
@@ -16,13 +15,18 @@
 // Setup-Funktion - wird einmal beim Start ausgeführt
 void setup() {
     // hier kommt der Setup-Code hin
+    ring.setBrightness(BRIGHTNESS);
+    ring.clear();
+    ring.show();
 
 }
 
 // Loop-Funktion - wird ununterbrochen ausgeführt
 void loop() {
     // hier kommt der Effekt-Code hin
-
+    int gruen = ring.Color(0, 255, 0);
+    ring.fill(gruen);
+    ring.show();
 }
 
 
