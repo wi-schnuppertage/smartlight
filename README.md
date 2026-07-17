@@ -1,6 +1,6 @@
 # WI-Schnuppertage - smartLight Projekt
 
-<img align="left" width="250" height="250" alt="WI_smartLight" src="https://github.com/user-attachments/assets/022d695d-0bb5-44d9-b165-b75d83b62885" style="margin-right: 20px;" />
+<img align="left" width="250" height="250" alt="WI_smartLight" src="https://github.com/user-attachments/assets/022d695d-0bb5-44d9-b165-b75d83b62885" />
 
 Willkommen beim Schnupperprojekt der HTL Anichstraße - Abteilung Wirtschaftsingenieure / Betriebsinformatik!
 
@@ -53,22 +53,16 @@ In diesem Projekt lernst du die Grundlagen der Programmierung mit einem ESP32-Mi
 ### Schritt 2: ESP32 Board Support installieren
 
 1. Öffne die Arduino IDE
-2. Gehe zu **Datei** → **Einstellungen**
-3. Füge im Feld **"Zusätzliche Boardverwalter-URLs"** folgende URL ein:
-   ```
-   https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json
-   ```
-4. Klicke auf **OK**
-5. Gehe zu **Tools** → **Board** → **Boardverwalter...**
-6. Suche nach **"esp32"**
-7. Installiere **"esp32 by Espressif Systems"** (neueste Version)
-8. Warte, bis die Installation abgeschlossen ist
+2. Gehe zu **Werkzeuge** → **Board** → **Boardverwalter...**
+3. Suche nach **"esp32"**
+4. Installiere **"esp32 by Espressif Systems"** (neueste Version)
+5. Warte, bis die Installation abgeschlossen ist
 
 ### Schritt 3: Board auswählen
 
 1. Schließe dein smartLight per USB-Kabel an den Computer an
-2. Gehe zu **Tools** → **Board** → **lolin** → **LOLIN C3 Mini**
-3. Gehe zu **Tools** → **Port** und wähle den COM-Port aus (z.B. COM3, COM4...)
+2. Gehe zu **Werkzeuge** → **Board** → **lolin** → **LOLIN C3 Mini**
+3. Gehe zu **Werkzeuge** → **Port** und wähle den COM-Port aus (z.B. COM3, COM4...)
    - *Hinweis: Wenn kein Port angezeigt wird, müssen eventuell USB-Treiber installiert werden*
 
 ### Schritt 4: Adafruit NeoPixel Bibliothek installieren
@@ -259,7 +253,7 @@ void loop() {
 
 **HTL Anichstraße, Innsbruck**  
 Wirtschaftsingenieure - Betriebsinformatik  
-WI-Schnuppertage 2025/2026  
+WI-Schnuppertage 
 © 2025 Andreas Eckhart
 
 ---
