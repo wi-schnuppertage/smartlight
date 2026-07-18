@@ -1,6 +1,18 @@
 @echo off
 setlocal
 
+:: Prüfen, ob git im PATH vorhanden ist
+git --version >nul 2>&1
+if %errorlevel% neq 0 (
+    echo.
+    echo ------------------------------------------------------------------
+    echo FEHLER: Git ist nicht installiert oder nicht im PATH gefunden.
+    echo Bitte installiere zuerst Git von https://git-scm.com/install/
+    echo ------------------------------------------------------------------
+    pause
+    exit /b
+)
+
 :: Pfad zum Dokumente-Verzeichnis via Windows API ermitteln
 for /f "delims=" %%I in ('powershell -NoProfile -Command "[Environment]::GetFolderPath('MyDocuments')"') do set "DOCS_DIR=%%I"
 
