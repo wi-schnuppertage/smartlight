@@ -4,7 +4,7 @@
  * Diese Datei enthält vordefinierte Hilfsfunktionen und Hardware-Konfiguration.
  * Alle deine Änderungen gehören in die main.cpp Datei!
  * 
- * HTL-Anichstrasse, Innsbruck / (c)2025 Andreas Eckhart
+ * HTL-Anichstrasse, Innsbruck / (c)2026 Andreas Eckhart
  ***********************************************************************************/
 
 #pragma once
