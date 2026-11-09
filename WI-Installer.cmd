@@ -24,7 +24,9 @@ echo Lade aktuelles WI-Schnupperprojekt...
 if exist "%TMPX%" rmdir /s /q "%TMPX%"
 mkdir "%TMPX%"
 
-curl -fSL --progress-bar --connect-timeout 10 -o "%ZIP%" "https://github.com/%REPO%/archive/refs/%REF%.zip" || goto :offline
+set "URL=https://github.com/%REPO%/archive/refs/%REF%.zip"
+powershell -NoProfile -Command "$j = Start-Job { & curl.exe -fsSL --connect-timeout 10 -o $env:ZIP $env:URL; $LASTEXITCODE }; while ($j.State -eq 'Running') { Write-Host -NoNewline '.'; Start-Sleep -Milliseconds 400 }; Write-Host ''; $r = Receive-Job $j 2>$null; $c = @($r)[-1]; if ($c -eq $null) { $c = 1 }; exit [int]$c"
+if errorlevel 1 goto :offline
 echo Entpacke...
 tar -xf "%ZIP%" -C "%TMPX%" || goto :offline
 
