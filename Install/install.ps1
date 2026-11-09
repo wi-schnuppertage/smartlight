@@ -112,15 +112,24 @@ if (-not $exe) {
     exit 0
 }
 
+$ideArgs = $null
 if (Test-Path $SketchPath) {
-    Start-Process -FilePath $exe -ArgumentList "`"$SketchPath`""
+    $ideArgs = "`"$SketchPath`""
 } else {
     Warn "Sketch nicht gefunden: $SketchPath"
-    Start-Process -FilePath $exe
+    Start-Sleep -Seconds 3
 }
 
 Write-Host ''
-Write-Host 'Fertig.' -ForegroundColor Green
+Write-Host 'Fertig. Arduino IDE wird gestartet.' -ForegroundColor Green
 try { Stop-Transcript | Out-Null } catch {}
-Start-Sleep -Seconds 2
+
+# Konsole loesen, damit sich das Fenster nach dem Start der IDE schliesst.
+# Sonst halten die IDE und ihre Hilfsprozesse das Fenster offen.
+try {
+    Add-Type -Namespace WI -Name Native -MemberDefinition '[DllImport("kernel32.dll")] public static extern bool FreeConsole();'
+    [void][WI.Native]::FreeConsole()
+} catch {}
+
+if ($ideArgs) { Start-Process -FilePath $exe -ArgumentList $ideArgs } else { Start-Process -FilePath $exe }
 exit 0
