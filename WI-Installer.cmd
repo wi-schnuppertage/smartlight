@@ -19,12 +19,13 @@ set "ZIP=%TEMP%\wi-template.zip"
 set "TMPX=%TEMP%\wi-template"
 set "PS1=%CACHE%\repo\Install\install.ps1"
 
-echo Lade aktuelles Template...
+echo Lade aktuelles WI-Schnupperprojekt...
 
 if exist "%TMPX%" rmdir /s /q "%TMPX%"
 mkdir "%TMPX%"
 
-curl -fsSL --connect-timeout 10 -o "%ZIP%" "https://github.com/%REPO%/archive/refs/%REF%.zip" || goto :offline
+curl -fSL --progress-bar --connect-timeout 10 -o "%ZIP%" "https://github.com/%REPO%/archive/refs/%REF%.zip" || goto :offline
+echo Entpacke...
 tar -xf "%ZIP%" -C "%TMPX%" || goto :offline
 
 set "NEW="
