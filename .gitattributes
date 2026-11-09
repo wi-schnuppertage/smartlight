@@ -1,0 +1,2 @@
+# Batch-Dateien nicht umwandeln (benoetigen CRLF)
+*.cmd -text

@@ -18,7 +18,6 @@ In diesem Projekt lernst du die Grundlagen der Programmierung mit einem ESP32-Mi
    - [Schritt 2: ESP32 Board Support installieren](#schritt-2-esp32-board-support-installieren)
    - [Schritt 3: Board auswählen](#schritt-3-board-auswählen)
    - [Schritt 4: Adafruit NeoPixel Bibliothek installieren](#schritt-4-adafruit-neopixel-bibliothek-installieren)
-   - [Schritt 5: Git-Client installieren](#schritt-5-git-client-installieren)
 3. [smartLight-Projekt herunterladen](#3-smartlight-projekt-herunterladen)
 4. [Projekt öffnen und hochladen](#4-projekt-öffnen-und-hochladen)
 5. [Programmieren lernen](#5-programmieren-lernen)
@@ -36,7 +35,6 @@ In diesem Projekt lernst du die Grundlagen der Programmierung mit einem ESP32-Mi
 - **WI-smartLight Platine mit ESP32-Mikrocontroller und LED Ring** (mit USB-C-Kabel)
 
 ### Software
-- **Git-Client** (kostenlos zum Download verfügbar)
 - **Arduino IDE** (Version 2.x empfohlen / kostenlos verfügbar)
 - **USB-Treiber** für ESP32 (unter Windows 11 normalerweise bereits installiert)
 
@@ -74,21 +72,18 @@ In diesem Projekt lernst du die Grundlagen der Programmierung mit einem ESP32-Mi
 3. Installiere **"Adafruit NeoPixel"** von Adafruit
 4. Warte, bis die Installation abgeschlossen ist
 
-### Schritt 5: Git-Client installieren
-
-1. Öffne deinen Browser und gehe zu: https://git-scm.com/install/
-2. Lade die aktuelle **Git-Version** für Windows herunter
-3. Führe die heruntergeladene Installationsdatei aus
-
 ---
 
 ## 3. smartLight-Projekt herunterladen
 
 ### Automatische Installation (empfohlen)
-1. Stelle sicher, dass Git auf deinem Rechner installiert ist (siehe Schritt 5)
-2. Laden die Datei **WI-Installer.cmd** auf deinen Rechner
-3. Führe die Datei aus und bestätige die Sicherheitsabfrage
-5. Nach erfolgreicher Installation findest du unter **Dokumente** → **Arduino** den Ordner **WI-Schnuppertag**
+1. Lade die Datei **[WI-Installer.cmd](https://github.com/wi-schnuppertage/smartlight/raw/main/WI-Installer.cmd)** auf deinen Rechner (Rechtsklick auf den Link → **Link speichern unter...**)
+2. Der Browser warnt eventuell vor dieser Dateiart. Klicke auf **Behalten**
+3. Doppelklicke die heruntergeladene Datei. Bei der Meldung "Der Computer wurde durch Windows geschützt" klicke auf **Weitere Informationen** → **Trotzdem ausführen**
+4. Warte, bis die Installation abgeschlossen ist. Die Arduino IDE startet automatisch mit dem Projekt
+5. Du findest das Projekt danach unter **Dokumente** → **Arduino** → **WI-Schnuppertag**
+
+> **Hinweis:** Bei jeder Installation wird der Ordner **WI-Schnuppertag** komplett ersetzt und eine geöffnete Arduino IDE geschlossen. Eigene Änderungen gehen dabei verloren. Speichere deine Arbeit daher unter einem anderen Namen (**Datei** → **Speichern unter...**).
 
 ### Manuelle Installation
 1. Öffne deinen Browser (Chrome, Firefox, Edge...)
@@ -100,7 +95,7 @@ In diesem Projekt lernst du die Grundlagen der Programmierung mit einem ESP32-Mi
 7. **Rechtsklick** auf die ZIP-Datei → **"Alle extrahieren..."**
 8. Klicke auf **"Extrahieren"** (Standard-Einstellungen sind okay)
 9. Es wird ein neuer Ordner **`smartlight-main`** erstellt
-10. Kopiere den Ordner **WI-Schnuppertag** nach **Dokumente** → **Arduino**
+10. Verschiebe den Ordner **`smartlight-main`** nach **Dokumente** → **Arduino** und benenne ihn in **WI-Schnuppertag** um
 
 ---
 
@@ -261,7 +256,6 @@ void loop() {
 - **Arduino Referenz:** https://www.arduino.cc/reference/de/
 - **Adafruit NeoPixel Guide:** https://learn.adafruit.com/adafruit-neopixel-uberguide
 - **ESP32 Dokumentation:** https://docs.espressif.com/projects/arduino-esp32/
-- **Git Dokumentation** https://git-scm.com/ 
 
 ---
 

@@ -1,94 +1,69 @@
 @echo off
 setlocal
-cls
+title WI-Schnuppertag
 
-echo ------------------------------------------------------------------
-echo ------------------------------------------------------------------
-echo             Starte WI-Schnuppertag Installation...
-echo ------------------------------------------------------------------
-echo ------------------------------------------------------------------
-echo.
-timeout /t 3 >nul
+:: =====================================================================
+:: Startet die Schulung mit einem frischen Template.
+:: 1. Laedt den aktuellen Stand des Repos als ZIP (kein Git noetig)
+:: 2. Ohne Internet: verwendet den zuletzt geladenen Stand
+:: 3. Fuehrt Install\install.ps1 aus dem Repo aus
+:: Diese Datei aendert sich nie. Alle Logik liegt im Repo.
+:: =====================================================================
 
-:: Prüfen, ob git im PATH vorhanden ist
-git --version >nul 2>&1
-if %errorlevel% neq 0 (
+set "REPO=wi-schnuppertage/smartlight"
+:: Branch: heads/main   Tag: tags/stable
+set "REF=heads/main"
+
+set "CACHE=%LOCALAPPDATA%\WI-Schnuppertag"
+set "ZIP=%TEMP%\wi-template.zip"
+set "TMPX=%TEMP%\wi-template"
+set "PS1=%CACHE%\repo\Install\install.ps1"
+
+echo Lade aktuelles Template...
+
+if exist "%TMPX%" rmdir /s /q "%TMPX%"
+mkdir "%TMPX%"
+
+curl -fsSL --connect-timeout 10 -o "%ZIP%" "https://github.com/%REPO%/archive/refs/%REF%.zip" || goto :offline
+tar -xf "%ZIP%" -C "%TMPX%" || goto :offline
+
+set "NEW="
+for /d %%D in ("%TMPX%\*") do set "NEW=%%D"
+if not defined NEW goto :offline
+if not exist "%NEW%\Install\install.ps1" goto :offline
+
+:: Neuen Stand einsetzen, alten erst nach Erfolg loeschen
+if not exist "%CACHE%" mkdir "%CACHE%"
+if exist "%CACHE%\repo.old" rmdir /s /q "%CACHE%\repo.old"
+if exist "%CACHE%\repo" move "%CACHE%\repo" "%CACHE%\repo.old" >nul
+if exist "%CACHE%\repo" goto :offline
+move "%NEW%" "%CACHE%\repo" >nul
+if errorlevel 1 (
+    if exist "%CACHE%\repo.old" move "%CACHE%\repo.old" "%CACHE%\repo" >nul
+    goto :offline
+)
+if exist "%CACHE%\repo.old" rmdir /s /q "%CACHE%\repo.old"
+goto :run
+
+:offline
+if exist "%PS1%" (
+    echo [WARNUNG] Download nicht moeglich. Verwende zuletzt geladenen Stand.
+    goto :run
+)
+echo [FEHLER] Download fehlgeschlagen und kein lokaler Stand vorhanden.
+echo Bitte Internetverbindung pruefen.
+pause
+exit /b 1
+
+:run
+del "%ZIP%" >nul 2>&1
+rmdir /s /q "%TMPX%" >nul 2>&1
+
+powershell -NoProfile -ExecutionPolicy Bypass -File "%PS1%" -Launcher "%~f0"
+if errorlevel 1 (
     echo.
-    echo ------------------------------------------------------------------
-    echo FEHLER: Git ist nicht installiert oder nicht im PATH gefunden.
-    echo Bitte installiere zuerst Git von https://git-scm.com/install/
-    echo ------------------------------------------------------------------
+    echo [FEHLER] Installation fehlgeschlagen. Log: %TEMP%\wi-install.log
     pause
-    exit /b
+    exit /b 1
 )
-
-:: Pfad zum Dokumente-Verzeichnis via Windows API ermitteln
-for /f "delims=" %%I in ('powershell -NoProfile -Command "[Environment]::GetFolderPath('MyDocuments')"') do set "DOCS_DIR=%%I"
-
-:: Pfad zum Arduino-Ordner definieren
-set "PROJECT_DIR=WI-Schnuppertag"
-set "TARGET_DIR=%DOCS_DIR%\Arduino\%PROJECT_DIR%"
-
-:: HIER DIE REPO-URL ANPASSEN
-set "REPO_URL=https://github.com/wi-schnuppertage/smartlight.git"
-
-:: HIER DEN NAMEN DEINER SKETCH-DATEI ANPASSEN (inkl. .ino)
-set "SKETCH_NAME=01_Programmieren\01_Programmieren.ino"
-
-:: Der Prozessname mit Leerzeichen
-set "PROZESSNAME=Arduino IDE.exe"
-
-:: Pruefen, ob der Arduino IDE.exe Prozess laeuft
-tasklist /FI "IMAGENAME eq %PROZESSNAME%" 2>NUL | find /I "%PROZESSNAME%" >NUL
-
-if "%ERRORLEVEL%" neq 0 (
-    echo %PROZESSNAME% ist gestartet und muss beendet werden
-    echo Beende %PROZESSNAME%...
-	timeout /t 3 >nul
-    REM Arduino-IDE.exe beenden
-	taskkill /F /IM "%PROZESSNAME%" /T >nul 2>&1
-)
-
-:: 1. Altes Verzeichnis loeschen, falls es existiert
-if exist "%TARGET_DIR%" (
-    echo Loesche alten Projektordner: %TARGET_DIR%
-    rmdir /s /q "%TARGET_DIR%"
-)
-
-:: 2. In den Arduino-Mutterordner wechseln
-if not exist "%DOCS_DIR%\Arduino" (
-    mkdir "%DOCS_DIR%\Arduino"
-)
-cd /d "%DOCS_DIR%\Arduino"
-
-:: 3. Repo frisch klonen
-echo.
-echo ------------------------------------------------------------------
-echo Klone Repository neu...
-echo ------------------------------------------------------------------
-
-git clone "%REPO_URL%" %PROJECT_DIR%
-timeout /t 3 >nul
-
-if %ERRORLEVEL% equ 0 (
-    :: 4. Arduino IDE mit dem Sketch starten
-    echo.
-    echo ------------------------------------------------------------------
-    echo Starte Arduino IDE...
-    echo ------------------------------------------------------------------
-	timeout /t 3 >nul
-    if exist "%PROJECT_DIR%\%SKETCH_NAME%" (
-		powershell -Command "Start-Process '%PROJECT_DIR%\%SKETCH_NAME%' -WindowStyle Hidden"
-    ) else (
-        echo HINWEIS: Die Datei %SKETCH_NAME% wurde im Hauptordner des Repos nicht gefunden.
-    )
-
-) else (
-    echo.
-    echo ---------------------------------------------------
-    echo FEHLER: Beim Klonen ist etwas schiefgelaufen.
-    echo Ist Git installiert und die URL korrekt?
-    echo ---------------------------------------------------
-)
-
-timeout /t 3 >nul
+exit /b 0
