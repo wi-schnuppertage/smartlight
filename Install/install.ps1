@@ -12,7 +12,7 @@ $PdfRel      = '10_Dokumentation\WI-Schnupperprogramm.pdf'
 $PdfLinkName = 'WI-Schnupperprogramm'   # Name der Verknuepfung (ohne .lnk)
 $OpenPdf     = $false                   # $true: PDF beim Start automatisch oeffnen
 # Nicht ins Template kopieren:
-$Exclude     = @('.git', '.github', '.gitignore', '.gitattributes', 'Install', 'WI-Installer.cmd')
+$Exclude     = @('.git', '.github', '.gitignore', '.gitattributes', 'images', 'Install', 'WI-Installer.cmd')
 
 $RepoDir = Split-Path -Parent $PSScriptRoot
 

@@ -1,6 +1,6 @@
 # WI-Schnuppertage - smartLight Projekt
 
-<img align="left" width="250" height="250" alt="WI_smartLight" src="https://github.com/user-attachments/assets/022d695d-0bb5-44d9-b165-b75d83b62885" />
+<img align="left" width="250" alt="WI_smartLight" src="images/WI_smartLight.png" />
 
 Willkommen beim Schnupperprojekt der HTL Anichstraße - Abteilung Wirtschaftsingenieure / Betriebsinformatik!
 
