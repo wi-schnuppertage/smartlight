@@ -8,8 +8,11 @@ $ErrorActionPreference = 'Stop'
 # === Einstellungen ===
 $ProjectName = 'WI-Schnuppertag'
 $SketchRel   = '01_Programmieren\01_Programmieren.ino'
+$PdfRel      = '10_Dokumentation\WI-Schnupperprogramm.pdf'
+$PdfLinkName = 'WI-Schnupperprogramm'   # Name der Verknuepfung (ohne .lnk)
+$OpenPdf     = $false                   # $true: PDF beim Start automatisch oeffnen
 # Nicht ins Template kopieren:
-$Exclude     = @('.git', '.github', '.gitignore', 'Install', 'WI-Installer.cmd')
+$Exclude     = @('.git', '.github', '.gitignore', '.gitattributes', 'Install', 'WI-Installer.cmd')
 
 $RepoDir = Split-Path -Parent $PSScriptRoot
 
@@ -92,6 +95,28 @@ if (Test-Path $LibSrc) {
     }
 }
 
+# === Verknuepfung zur PDF-Dokumentation (Desktop und Ordner der WI-Installer.cmd) ===
+$PdfPath = Join-Path $Target $PdfRel
+if (Test-Path $PdfPath) {
+    $dirs = @([Environment]::GetFolderPath('Desktop'))
+    if ($Launcher -and (Test-Path $Launcher)) { $dirs += (Split-Path -Parent $Launcher) }
+    $done = @()
+    foreach ($d in $dirs) {
+        $key = $d.TrimEnd('\').ToLowerInvariant()
+        if ($done -contains $key) { continue }
+        $done += $key
+        try {
+            $link = (New-Object -ComObject WScript.Shell).CreateShortcut((Join-Path $d "$PdfLinkName.lnk"))
+            $link.TargetPath = $PdfPath
+            $link.WorkingDirectory = Split-Path -Parent $PdfPath
+            $link.Save()
+            Ok "Verknuepfung: $d"
+        } catch { Warn "Verknuepfung in ${d}: $_" }
+    }
+} else {
+    Warn "PDF nicht gefunden: $PdfPath"
+}
+
 Update-Launcher
 
 # === 3. Arduino IDE starten ===
@@ -131,5 +156,6 @@ try {
     [void][WI.Native]::FreeConsole()
 } catch {}
 
+if ($OpenPdf -and (Test-Path $PdfPath)) { Start-Process -FilePath $PdfPath }
 if ($ideArgs) { Start-Process -FilePath $exe -ArgumentList $ideArgs } else { Start-Process -FilePath $exe }
 exit 0
