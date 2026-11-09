@@ -35,7 +35,7 @@ In diesem Projekt lernst du die Grundlagen der Programmierung mit einem ESP32-Mi
 - **WI-smartLight Platine mit ESP32-Mikrocontroller und LED Ring** (mit USB-C-Kabel)
 
 ### Software
-- **Arduino IDE** (Version 2.x empfohlen / kostenlos verfügbar)
+- **Arduino IDE** (Version 2.3.10 oder aktueller empfohlen / kostenlos verfügbar)
 - **USB-Treiber** für ESP32 (unter Windows 11 normalerweise bereits installiert)
 
 ---
@@ -67,6 +67,8 @@ In diesem Projekt lernst du die Grundlagen der Programmierung mit einem ESP32-Mi
 
 ### Schritt 4: Adafruit NeoPixel Bibliothek installieren
 
+> **Hinweis:** Bei der automatischen Installation (siehe Abschnitt 3) wird die Bibliothek mitinstalliert. Dieser Schritt ist dann nicht nötig.
+
 1. Gehe zu **Tools** → **Bibliotheken verwalten...**
 2. Suche nach **"Adafruit NeoPixel"**
 3. Installiere **"Adafruit NeoPixel"** von Adafruit
@@ -77,13 +79,18 @@ In diesem Projekt lernst du die Grundlagen der Programmierung mit einem ESP32-Mi
 ## 3. smartLight-Projekt herunterladen
 
 ### Automatische Installation (empfohlen)
+
+Voraussetzung: Die Schritte 1 bis 3 (Arduino IDE und ESP32 Board Support) sind erledigt und du hast eine Internetverbindung.
+
 1. Lade die Datei **[WI-Installer.cmd](https://github.com/wi-schnuppertage/smartlight/raw/main/WI-Installer.cmd)** auf deinen Rechner (Rechtsklick auf den Link → **Link speichern unter...**)
 2. Der Browser warnt eventuell vor dieser Dateiart. Klicke auf **Behalten**
 3. Doppelklicke die heruntergeladene Datei. Bei der Meldung "Der Computer wurde durch Windows geschützt" klicke auf **Weitere Informationen** → **Trotzdem ausführen**
-4. Warte, bis die Installation abgeschlossen ist. Die Arduino IDE startet automatisch mit dem Projekt
+4. Warte, bis die Installation abgeschlossen ist. Während des Downloads erscheinen Punkte im Fenster. Danach schließt sich das Fenster, und die Arduino IDE startet automatisch mit dem Projekt
 5. Du findest das Projekt danach unter **Dokumente** → **Arduino** → **WI-Schnuppertag**
+6. Die erforderliche Bibliothek **Adafruit NeoPixel** wird dabei automatisch mitinstalliert
+7. Eine Verknüpfung zur Dokumentation (**WI-Schnupperprogramm**, PDF) liegt auf dem Desktop und im Ordner, in dem die Datei **WI-Installer.cmd** gespeichert ist
 
-> **Hinweis:** Bei jeder Installation wird der Ordner **WI-Schnuppertag** komplett ersetzt und eine geöffnete Arduino IDE geschlossen. Eigene Änderungen gehen dabei verloren. Speichere deine Arbeit daher unter einem anderen Namen (**Datei** → **Speichern unter...**).
+> **Hinweis:** Bei jeder Installation wird der Ordner **WI-Schnuppertag** komplett ersetzt und eine geöffnete Arduino IDE geschlossen. Eigene Änderungen gehen dabei verloren. Speichere deine Arbeit daher unter einem anderen Namen (**Datei** → **Speichern unter...**). Du kannst die Datei jederzeit erneut ausführen, um das Projekt auf den Ausgangszustand zurückzusetzen.
 
 ### Manuelle Installation
 1. Öffne deinen Browser (Chrome, Firefox, Edge...)
@@ -96,10 +103,13 @@ In diesem Projekt lernst du die Grundlagen der Programmierung mit einem ESP32-Mi
 8. Klicke auf **"Extrahieren"** (Standard-Einstellungen sind okay)
 9. Es wird ein neuer Ordner **`smartlight-main`** erstellt
 10. Verschiebe den Ordner **`smartlight-main`** nach **Dokumente** → **Arduino** und benenne ihn in **WI-Schnuppertag** um
+11. Kopiere den Ordner **`Adafruit_NeoPixel`** aus **WI-Schnuppertag** → **Install** → **libraries** nach **Dokumente** → **Arduino** → **libraries** (oder installiere die Bibliothek wie in Schritt 4 beschrieben)
 
 ---
 
 ## 4. Projekt öffnen und hochladen
+
+Nach der automatischen Installation öffnet sich der Sketch **01_Programmieren** von selbst. Sonst öffnest du ihn so:
 
 1. Öffne die Arduino IDE.
 2. Klicke links in der Navigationsleiste auf das Ordner-Symbol (Sketchbook)
@@ -113,12 +123,12 @@ Alternativ:
 ### Code hochladen
 
 1. Stelle sicher, dass dein smartLight angeschlossen ist
-2. Wählen unter **Board** → **lolin** → **LOLIN C3 Mini**
-3. Wähle unter **Port** den COM-Port aus (z.B. COM3, COM4...)
-2. Klicke auf den **Upload-Button** (Pfeil nach rechts) oben links
-3. Warte, bis der Code kompiliert und hochgeladen wird
-4. In der Konsole sollte **"Hard resetting via RTS pin..."** erscheinen
-5. Dein Programm läuft jetzt auf dem smartLight!
+2. Wähle unter **Werkzeuge** → **Board** → **lolin** → **LOLIN C3 Mini**
+3. Wähle unter **Werkzeuge** → **Port** den COM-Port aus (z.B. COM3, COM4...)
+4. Klicke auf den **Upload-Button** (Pfeil nach rechts) oben links
+5. Warte, bis der Code kompiliert und hochgeladen wird
+6. In der Konsole sollte **"Hard resetting via RTS pin..."** erscheinen
+7. Dein Programm läuft jetzt auf dem smartLight!
 
 ---
 
@@ -126,14 +136,17 @@ Alternativ:
 
 ### Datei-Struktur
 
-Das Projekt, das unter `Dokumente/Arduino/WI-Schnuppertag` zu finden ist, enthält zwei Hauptordner:
+Das Projekt, das unter `Dokumente/Arduino/WI-Schnuppertag` zu finden ist, enthält drei Ordner:
 
 **01_Programmieren** – Programmierübungen für Anfänger:
 - **`01_Programmieren.ino`** – Hier programmierst du! Dein Hauptcode für erste Übungen mit dem LED-Ring.
 - **`helper.h`** – Hilfsfunktionen und Hardware-Setup (NICHT BEARBEITEN!).
 
-**02_Funktionstest** – Funktionstest für Platine:
+**09_Funktionstest** – Funktionstest für Platine:
 - **`02_Funktionstest.ino`** – Code um die Funktionalität des WI-smartLight zu testen (alle LEDs leuchten grün).
+
+**10_Dokumentation** – Dokumentation zum Schnupperprogramm:
+- **`WI-Schnupperprogramm.pdf`** – Die Dokumentation als PDF (auch über die Verknüpfung auf dem Desktop erreichbar).
 
 ---
 
@@ -169,7 +182,7 @@ ring.show();
 // warten
 delay(500)  // 0,5 Sekunden warten
 
-ring.fill(gruen, 7, 5)   // ab LED 8 5 LEDs in blau einschalten
+ring.fill(gruen, 7, 5)   // ab LED 8 werden 5 LEDs in grün einschalten
 ring.show();
 ```
 
@@ -248,6 +261,15 @@ void loop() {
 1. Halte den **BOOT-Button** auf dem ESP32 gedrückt
 2. Klicke auf Upload
 3. Lasse den Button los, wenn "Connecting..." erscheint
+
+### Problem: Der Installer meldet einen Download-Fehler
+
+**Lösung:**
+1. Prüfe deine Internetverbindung
+2. Öffne https://github.com/wi-schnuppertage/smartlight im Browser, um zu testen, ob GitHub erreichbar ist
+3. Starte **WI-Installer.cmd** erneut
+4. Ist die Installation schon einmal gelaufen, verwendet der Installer ohne Internet den zuletzt geladenen Stand
+5. Das Protokoll der Installation liegt unter `%TEMP%\wi-install.log`
 
 ---
 
