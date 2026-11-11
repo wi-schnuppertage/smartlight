@@ -95,24 +95,18 @@ if (Test-Path $LibSrc) {
     }
 }
 
-# === Verknuepfung zur PDF-Dokumentation (Desktop und Ordner der WI-Installer.cmd) ===
+# === Verknuepfung zur PDF-Dokumentation (Ordner der WI-Installer.cmd, sonst Desktop) ===
 $PdfPath = Join-Path $Target $PdfRel
 if (Test-Path $PdfPath) {
-    $dirs = @([Environment]::GetFolderPath('Desktop'))
-    if ($Launcher -and (Test-Path $Launcher)) { $dirs += (Split-Path -Parent $Launcher) }
-    $done = @()
-    foreach ($d in $dirs) {
-        $key = $d.TrimEnd('\').ToLowerInvariant()
-        if ($done -contains $key) { continue }
-        $done += $key
-        try {
-            $link = (New-Object -ComObject WScript.Shell).CreateShortcut((Join-Path $d "$PdfLinkName.lnk"))
-            $link.TargetPath = $PdfPath
-            $link.WorkingDirectory = Split-Path -Parent $PdfPath
-            $link.Save()
-            Ok "Verknuepfung: $d"
-        } catch { Warn "Verknuepfung in ${d}: $_" }
-    }
+    if ($Launcher -and (Test-Path $Launcher)) { $d = Split-Path -Parent $Launcher }
+    else { $d = [Environment]::GetFolderPath('Desktop') }
+    try {
+        $link = (New-Object -ComObject WScript.Shell).CreateShortcut((Join-Path $d "$PdfLinkName.lnk"))
+        $link.TargetPath = $PdfPath
+        $link.WorkingDirectory = Split-Path -Parent $PdfPath
+        $link.Save()
+        Ok "Verknuepfung: $d"
+    } catch { Warn "Verknuepfung in ${d}: $_" }
 } else {
     Warn "PDF nicht gefunden: $PdfPath"
 }

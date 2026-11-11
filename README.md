@@ -88,7 +88,7 @@ Voraussetzung: Die Schritte 1 bis 3 (Arduino IDE und ESP32 Board Support) sind e
 4. Warte, bis die Installation abgeschlossen ist. Während des Downloads erscheinen Punkte im Fenster. Danach schließt sich das Fenster, und die Arduino IDE startet automatisch mit dem Projekt
 5. Du findest das Projekt danach unter **Dokumente** → **Arduino** → **WI-Schnuppertag**
 6. Die erforderliche Bibliothek **Adafruit NeoPixel** wird dabei automatisch mitinstalliert
-7. Eine Verknüpfung zur Dokumentation (**WI-Schnupperprogramm**, PDF) liegt auf dem Desktop und im Ordner, in dem die Datei **WI-Installer.cmd** gespeichert ist
+7. Eine Verknüpfung zur Dokumentation (**WI-Schnupperprogramm**, PDF) liegt im Ordner, in dem die Datei **WI-Installer.cmd** gespeichert ist
 
 > **Hinweis:** Bei jeder Installation wird der Ordner **WI-Schnuppertag** komplett ersetzt und eine geöffnete Arduino IDE geschlossen. Eigene Änderungen gehen dabei verloren. Speichere deine Arbeit daher unter einem anderen Namen (**Datei** → **Speichern unter...**). Du kannst die Datei jederzeit erneut ausführen, um das Projekt auf den Ausgangszustand zurückzusetzen.
 
@@ -146,7 +146,7 @@ Das Projekt, das unter `Dokumente/Arduino/WI-Schnuppertag` zu finden ist, enthä
 - **`02_Funktionstest.ino`** – Code um die Funktionalität des WI-smartLight zu testen (alle LEDs leuchten grün).
 
 **10_Dokumentation** – Dokumentation zum Schnupperprogramm:
-- **`WI-Schnupperprogramm.pdf`** – Die Dokumentation als PDF (auch über die Verknüpfung auf dem Desktop erreichbar).
+- **`WI-Schnupperprogramm.pdf`** – Die Dokumentation als PDF (auch über die Verknüpfung neben der **WI-Installer.cmd** erreichbar).
 
 ---
 
